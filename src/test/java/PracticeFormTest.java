@@ -17,6 +17,7 @@ public class PracticeFormTest {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com/";
     }
+    
     @Test
     void fillFullPracticeFormTest() {
         open("automation-practice-form");
