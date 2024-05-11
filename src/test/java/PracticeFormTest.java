@@ -1,8 +1,8 @@
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
@@ -38,7 +38,7 @@ public class PracticeFormTest {
         $("label[for=hobbies-checkbox-1]").click(); // Sports
         $("label[for=hobbies-checkbox-3]").click(); // Music
 
-        $("#uploadPicture").uploadFile(new File("src/test/resources/comma.jpg"));
+        $("#uploadPicture").uploadFromClasspath("comma.jpg");
 
         $("#currentAddress").setValue("Test address");
         $("#state input").setValue("Rajasthan").pressEnter();
@@ -57,5 +57,10 @@ public class PracticeFormTest {
         $x("//td[contains(text(),'Picture')]/../td[2]").shouldHave(text("comma.jpg"));
         $x("//td[contains(text(),'Address')]/../td[2]").shouldHave(text("test address"));
         $x("//td[contains(text(),'State and City')]/../td[2]").shouldHave(text("Rajasthan Jaiselmer"));
+    }
+
+    @AfterEach
+    void afterEach() {
+        Selenide.closeWebDriver();
     }
 }
